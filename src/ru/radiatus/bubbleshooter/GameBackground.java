@@ -3,13 +3,16 @@ package ru.radiatus.bubbleshooter;
 import java.awt.*;
 
 public class GameBackground {
+
     //Field
     private Color color;
+
 
     //Constructor
     public GameBackground(){
         color = Color.BLUE;
     }
+
 
     //Functions
     public void update(){

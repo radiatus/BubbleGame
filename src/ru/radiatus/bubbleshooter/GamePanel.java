@@ -18,6 +18,7 @@ public class GamePanel extends JPanel implements Runnable{
     public static GameBackground background;
     public static Player player;
     public static ArrayList<Bullet> bullets;
+    public static ArrayList<Enemy> enemies;
 
     //Constructor
     public GamePanel() {
@@ -28,6 +29,7 @@ public class GamePanel extends JPanel implements Runnable{
         setFocusable(true);
         requestFocus();
     }
+
 
     //Functions
     public void start(){
@@ -49,6 +51,10 @@ public class GamePanel extends JPanel implements Runnable{
         background = new GameBackground();
         player = new Player();
         bullets = new ArrayList<Bullet>();
+        enemies = new ArrayList<Enemy>();
+        // TODO: remove this
+        enemies.add(new Enemy(1, 1));
+        enemies.add(new Enemy(1, 1));
 
         while(true){ // TODO states
 
@@ -80,6 +86,10 @@ public class GamePanel extends JPanel implements Runnable{
                 i--;
             }
         }
+
+        // Enemies update
+        for(int i = 0; i < enemies.size(); i++)
+            enemies.get(i).update();
     }
 
     public void gameRender(){
@@ -92,6 +102,10 @@ public class GamePanel extends JPanel implements Runnable{
         // Bullets draw
         for(int i = 0; i < bullets.size(); i++)
             bullets.get(i).draw(g);
+
+        // Enemies draw
+        for(int i = 0; i < enemies.size(); i++)
+            enemies.get(i).draw(g);
     }
 
     private void gameDraw(){

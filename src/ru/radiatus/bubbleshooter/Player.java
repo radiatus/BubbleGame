@@ -24,6 +24,7 @@ public class Player {
 
     public static boolean isFiring;
 
+
     //Constructor
     public Player(){
         x = GamePanel.WIDTH / 2;
@@ -45,6 +46,7 @@ public class Player {
         isFiring = false;
     }
 
+
     //Getters
     public double getX() {
         return x;
@@ -53,6 +55,7 @@ public class Player {
     public double getY() {
         return y;
     }
+
 
     //Functions
     public void update(){

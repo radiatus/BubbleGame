@@ -14,6 +14,7 @@ public class Bullet {
 
     private Color color;
 
+
     //Constructor
     public Bullet(){
         x = GamePanel.player.getX();
@@ -24,6 +25,7 @@ public class Bullet {
 
         color = Color.WHITE;
     }
+
 
     //Functions
     public void update(){
