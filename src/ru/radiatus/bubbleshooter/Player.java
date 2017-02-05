@@ -9,6 +9,9 @@ public class Player {
     private double y;
     private int r;
 
+    private double dx; // Коэффицент смешения
+    private double dy; // вся эта штука нужна чтобы по диагонали норм двигался
+
     private int speed;
 
     private Color color1;
@@ -19,12 +22,18 @@ public class Player {
     public static boolean left;
     public static boolean right;
 
+    public static boolean isFiring;
+
     //Constructor
     public Player(){
         x = GamePanel.WIDTH / 2;
         y = GamePanel.HEIGHT / 2;
+
         r = 5;
         speed = 5;
+
+        dx = 0;
+        dy = 0;
 
         color1 = Color.WHITE;
 
@@ -32,15 +41,39 @@ public class Player {
         down = false;
         left = false;
         right = false;
+
+        isFiring = false;
+    }
+
+    //Getters
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
     }
 
     //Functions
     public void update(){
         // Здесь реализована система управления
-        if(up && y > r) y -= speed;
-        if(down && y < GamePanel.HEIGHT - r) y += speed;
-        if(left && x > r) x -= speed;
-        if(right && x < GamePanel.WIDTH - r) x += speed;
+        if(up && y > r) dy = -speed;
+        if(down && y < GamePanel.HEIGHT - r) dy = speed;
+        if(left && x > r) dx = -speed;
+        if(right && x < GamePanel.WIDTH - r) dx = speed;
+
+        if(up && left || up && right || down && left || down && right){
+            dy = dy * Math.sin(Math.PI/4); // используются радианы
+            dx = dx * Math.cos(Math.PI/4); // поэтому нельзя писать 45 градусов
+        }
+        // Обновляем координаты
+        y += dy;
+        x += dx;
+        // Обнуляем смещение
+        dy = 0;
+        dx = 0;
+
+        if(isFiring) GamePanel.bullets.add(new Bullet());
     }
 
     public void draw(Graphics2D g){

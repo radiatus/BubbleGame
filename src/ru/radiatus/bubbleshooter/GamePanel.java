@@ -3,6 +3,7 @@ package ru.radiatus.bubbleshooter;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public class GamePanel extends JPanel implements Runnable{
 
@@ -16,6 +17,7 @@ public class GamePanel extends JPanel implements Runnable{
 
     public static GameBackground background;
     public static Player player;
+    public static ArrayList<Bullet> bullets;
 
     //Constructor
     public GamePanel() {
@@ -46,6 +48,7 @@ public class GamePanel extends JPanel implements Runnable{
 
         background = new GameBackground();
         player = new Player();
+        bullets = new ArrayList<Bullet>();
 
         while(true){ // TODO states
 
@@ -67,6 +70,16 @@ public class GamePanel extends JPanel implements Runnable{
 
         // Player update
         player.update();
+
+        // Bullets update
+        for(int i = 0; i < bullets.size(); i++){
+            bullets.get(i).update();
+            // удаляет пулю
+            if(bullets.get(i).remove()) {
+                bullets.remove(i);
+                i--;
+            }
+        }
     }
 
     public void gameRender(){
@@ -75,6 +88,10 @@ public class GamePanel extends JPanel implements Runnable{
 
         // Player draw
         player.draw(g);
+
+        // Bullets draw
+        for(int i = 0; i < bullets.size(); i++)
+            bullets.get(i).draw(g);
     }
 
     private void gameDraw(){
