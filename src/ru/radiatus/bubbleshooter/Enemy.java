@@ -26,9 +26,9 @@ public class Enemy {
 
         switch (type){
             case 1:
-                color = Color.GREEN;
                 switch (rank){
                     case 1:
+                        color = Color.GREEN;
                         x = Math.random() *  GamePanel.WIDTH;
                         y = 0;
 
@@ -36,12 +36,27 @@ public class Enemy {
 
                         speed = 2;
 
+                        health = 2;
+
                         double angle = Math.toRadians(Math.random()*360);
                         dx = Math.sin(angle) * speed;
                         dy = Math.cos(angle) * speed;
-
                 }
         }
+    }
+
+
+    //Getters
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public int getR() {
+        return r;
     }
 
 
@@ -63,6 +78,13 @@ public class Enemy {
         g.setStroke(new BasicStroke(3));
         g.setColor(color.darker());
         g.drawOval((int)(x - r), (int)(y - r), 2 * r, 2 * r);
-        g.setStroke(new BasicStroke(1));
+    }
+
+    public void hit(){
+        health--;
+    }
+
+    public boolean remove(){
+        return health <= 0 ? true : false;
     }
 }

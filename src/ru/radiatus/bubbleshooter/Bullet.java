@@ -27,6 +27,20 @@ public class Bullet {
     }
 
 
+    //Getters
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public int getR() {
+        return r;
+    }
+
+
     //Functions
     public void update(){
         y -= speed;
