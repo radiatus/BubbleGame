@@ -13,6 +13,7 @@ public class Player {
     private double dy; // вся эта штука нужна чтобы по диагонали норм двигался
 
     private int speed;
+    private int health;
 
     private Color color1;
     private Color color2;
@@ -32,6 +33,7 @@ public class Player {
 
         r = 5;
         speed = 5;
+        health = 10;
 
         dx = 0;
         dy = 0;
@@ -54,6 +56,10 @@ public class Player {
 
     public double getY() {
         return y;
+    }
+
+    public int getR() {
+        return r;
     }
 
 
@@ -86,5 +92,13 @@ public class Player {
         g.setColor(color1.darker()); // Делаем цвет потемнее
         g.drawOval((int)(x - r), (int)(y - r), 2 * r, 2 * r);
         g.setStroke(new BasicStroke(1));
+    }
+
+    public void hit(){
+        health--;
+    }
+
+    public boolean remove(){
+        return health <= 0 ? true : false;
     }
 }
