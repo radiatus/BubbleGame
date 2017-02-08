@@ -47,13 +47,11 @@ public class Wave {
 
     public void createEnemies(){
         int enemyCount = waveNumber * waveMultiplier;
-        if(waveNumber < 4){
-            while (enemyCount > 0){
-                int type = 1;
-                int rank = 1;
-                GamePanel.enemies.add(new Enemy(type, rank));
-                enemyCount -= type * rank;
-            }
+        while (enemyCount > 0){
+            int type = 1;
+            int rank = 1;
+            GamePanel.enemies.add(new Enemy(type, rank));
+            enemyCount -= type * rank;
         }
         waveNumber++;
     }
