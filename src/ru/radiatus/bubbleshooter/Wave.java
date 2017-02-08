@@ -55,6 +55,7 @@ public class Wave {
                 enemyCount -= type * rank;
             }
         }
+        waveNumber++;
     }
 
     public boolean showWave(){
@@ -69,7 +70,10 @@ public class Wave {
         alpha = 255 *Math.sin(Math.toRadians(alpha));
         if(alpha < 0) alpha = 0;
         if(alpha > 255) alpha = 255;
+        g.setFont(new Font("consolas", Font.PLAIN, 20));
         g.setColor(new Color(255, 255, 255, (int)alpha));
-        g.drawString(waveText, GamePanel.WIDTH/2, GamePanel.HEIGHT/2);
+        String s = " - " + waveNumber + "ая " + waveText;
+        long lenght = (long)g.getFontMetrics().getStringBounds(s, g).getWidth();
+        g.drawString(s, GamePanel.WIDTH/2 - (int) (lenght / 2), GamePanel.HEIGHT/2);
     }
 }
